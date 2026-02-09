@@ -9,18 +9,21 @@ const isValid = (username)=>{ //returns boolean
 //check is the username is valid
 let userToCheck=users.filter((user)=>{return user.username===username})
 if(userToCheck.length>0){
-    return true
+    return false
 }
-else {return false}
+else {return true}
+
 }
 
 const authenticatedUser = (username,password)=>{ //returns boolean
 //check if username and password match the one we have in records.
-let validUser=users.filter((user)=>user.username===username&&user.password===password)
-if (validUser>0){
+let validUser=users.filter((user)=>{return user.username===username && user.password===password})
+if(validUser.length>0){
     return true
 }
-else{return false}
+else{
+    return false
+}
 }
 
 //only registered users can login
@@ -36,6 +39,7 @@ if (authenticatedUser(username,password)){
     return res.status(200).json({message: "User successfully logged in."})
 }
 else{
+    return res.status(208).json({message:"Error logging in. Check details and try again."})}
 });
 
 // Add a book review
